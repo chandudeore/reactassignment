@@ -6,13 +6,15 @@ const initialState = {
   country: [],
 };
 
-export const countryReducer = (store, { type, payload }) => {
+export const countryReducer = (store = initialState, { type, payload }) => {
   switch (type) {
     case COUNTRYLOADING:
       return { ...store, loading: true, error: false };
     case COUNTRY:
-      return { ...store, loading: false, error: false, country: [...payload] };
+      return { ...store, country: [...payload], error: false };
     case COUNTRYERROR:
-      return { ...store, loading: false, error: true };
+      return { ...store, country: [], loading: false, error: true };
+    default:
+      return store;
   }
 };
